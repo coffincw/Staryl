@@ -6,8 +6,12 @@ public class EntityAttack {
     boolean repeatAttack;
     int percentHit;
     int tempDamage;
+    int temptempHealth;
 
-    void playerAttack(String monsterName, int monsterHealth_ndx, int[] monsterHealth ) {
+    static TrainingCenter training = new TrainingCenter();
+    static Player p = new Player();
+
+    void playerAttack(String monsterName, int monsterIndex, int[] monsterHealth) {
         final String attackMonster[] = {"neck", "eyes", "chest"};
         final int percentNeck[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         final int percentEyes[] = {0, 1, 2, 3, 4};
@@ -31,23 +35,37 @@ public class EntityAttack {
                 System.out.println("Invalid Input");
             }
         }
-        monsterHealth[monsterHealth_ndx] -= tempDamage;
-        if (monsterHealth[monsterHealth_ndx] < 0) {
-            monsterHealth[monsterHealth_ndx] = 0;
+        monsterHealth[monsterIndex] -= tempDamage;
+        if (monsterHealth[monsterIndex] < 0) {
+            monsterHealth[monsterIndex] = 0;
         }
-        System.out.println("You dealt " + tempDamage + " to the " + monsterName + " the " + monsterName + " has " + monsterHealth[monsterHealth_ndx] + " health remaining.");
+        System.out.println("You dealt " + tempDamage + " to the " + monsterName + "! the " + monsterName + " has " + monsterHealth[monsterIndex] + " health remaining.");
     }
 
-    void monsterAttack(String monsterName, int monsterdmgValue, int health) {
-        int temptempHealth;
-        health -= monsterdmgValue;
+    void monsterAttack(String monsterName, int monsterdmgValue, boolean checkmonster) {
+        if (checkmonster) {
+            training.tempHeath = 100;
+        }
+        if (training.training) {
+            training.tempHeath -= monsterdmgValue;
+            if (training.tempHeath < 0) {
+                training.tempHeath = 0;
+            }
+            temptempHealth = training.tempHeath;
+        } else {
+            System.out.println(starylMain.gameDiff);
+            temptempHealth = p.playerHealth[starylMain.gameDiff];
+            temptempHealth -= monsterdmgValue;
+            if (temptempHealth <= 0) {
+                p.playerLives[starylMain.gameDiff]--;
+                System.out.println("You lost a life");
+                p.playerHealth[starylMain.gameDiff] = p.healPHealth[starylMain.gameDiff];
+            } else {
+                p.playerHealth[starylMain.gameDiff] = temptempHealth;
+            }
+        }
         if (monsterdmgValue == 0) {
             System.out.println("The " + monsterName + "'s attack missed!");
-        }
-        if (health < 0) {
-            temptempHealth = 0;
-        } else {
-            temptempHealth = health;
         }
         System.out.println("The " + monsterName + " dealt " + monsterdmgValue + " damage! You now have " + temptempHealth + " health.");
     }

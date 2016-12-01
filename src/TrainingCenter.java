@@ -4,16 +4,18 @@
 public class TrainingCenter {
 
     static Gearset gear = new Gearset();
+    static MonsterOrganization monster = new MonsterOrganization();
     static EntityAttack attack = new EntityAttack();
-
+    final int monsterDMGLOW[] = {0, 10, 20};
+    final int monsterDMGHIGH[] = {10, 20, 30};
+    final String Monster[] = {"Findlewumper", "Gorp", "Calark"}; // monster names
+    final int trainingMH[] = {70, 120, 100}; // monster health
     private final String trainGear[] = {"helmet", "shirt", "pants", "boots", "weapon"}; // trainable gear
-    private final String Monster[] = {"Findlewumper", "Gorp", "Calark"}; // monster names
-    private final int trainingMH[] = {70, 120, 100};
-    private int tempHealth = 100;
-    private int nRounds;
-    private int nRounds_Final;
-
-
+    int nRounds; //round number
+    int nRounds_Final; //round number in order to stop rounds as being counted as completed when player died in them.
+    boolean training = true; // this may make it always be true
+    int tempHeath = 100;
+    boolean monstercheck;
 
     void trainingInfo(String centerName) {
         boolean trainrepeat = true;
@@ -38,89 +40,50 @@ public class TrainingCenter {
         }
     }
 
-    void initiateTraining(String trainObject, int TGndx) {
+    void initiateTraining(String trainObject, int trainingGearndx) {
         nRounds = 0;
+        training = true;
         System.out.println("Welcome to training! You will go through 4 fighting simulators inorder to level up your gear");
         while (nRounds <= 3) {
             nRounds++;
+            tempHeath = 100;
+            monstercheck = true;
             if (nRounds == 1) {
-                spawnFindlewumper();
+                spawnTrainingMonster(0);
             } else if (nRounds == 2) {
-                spawnGorp();
+                spawnTrainingMonster(1);
             } else if (nRounds == 3) {
-                spawnCalark();
+                spawnTrainingMonster(2);
             }
-        }
-        if (tempHealth > 0) {
-            if (nRounds == 4) {
-                nRounds = 3;
-            }
-            nRounds_Final = nRounds;
         }
         int experienceEarned;
         if (trainObject.equals(trainGear[4])) {
             gear.weaponExp[gear.weaponClass] += experienceEarned = (nRounds_Final * 25);
         } else {
-            gear.armourExp[TGndx] += experienceEarned = (nRounds_Final * 25);
+            gear.armourExp[trainingGearndx] += experienceEarned = (nRounds_Final * 25);
         }
 
         System.out.println("You completed " + nRounds_Final + " rounds congrats!\nYou earned " + experienceEarned + " for your " + trainObject);
         gear.armourLevelUp();
         gear.weaponLevelUp();
         gear.weaponClassUp();
+        training = false;
     }
 
-    void spawnFindlewumper() {
-        System.out.println("A Findlewumper approaches...");
-        while (trainingMH[0] > 0 && tempHealth > 0) {
-            attack.playerAttack(Monster[0], 0, trainingMH);
-            if (trainingMH[0] > 0) {
-                attack.monsterAttack(Monster[0],  starylMain.randomInt(0, 10), tempHealth);
+    void spawnTrainingMonster(int monsterIndex) {
+        System.out.println("A " + Monster[monsterIndex] + " approaches...");
+        while (trainingMH[monsterIndex] > 0 && tempHeath > 0) {
+            attack.playerAttack(Monster[monsterIndex], monsterIndex, trainingMH);
+            if (trainingMH[monsterIndex] > 0) {
+                attack.monsterAttack(Monster[monsterIndex], starylMain.randomInt(monsterDMGLOW[monsterIndex], monsterDMGHIGH[monsterIndex]), monstercheck);
             }
+            monstercheck = false;
         }
         if (trainingMH[0] <= 0) {
-            System.out.println("You defeated the " + Monster[0] + " with " + tempHealth + " health remaining!");
-            tempHealth = 100;
-        } else if (tempHealth <= 0) {
-            System.out.println("You were defeated by the " + Monster[0] + " who had " + trainingMH[0] + " health remaining.");
-            nRounds_Final = nRounds - 1;
-            nRounds = 4;
+            System.out.println("You defeated the " + Monster[monsterIndex] + " with " + attack.temptempHealth + " health remaining!");
 
-        }
-    }
-
-    void spawnGorp() {
-        System.out.println("A Gorp approaches...");
-        while (trainingMH[1] > 0 && tempHealth > 0) {
-            attack.playerAttack(Monster[1], 1, trainingMH);
-            if (trainingMH[1] > 0) {
-                attack.monsterAttack(Monster[1], starylMain.randomInt(10, 20), tempHealth);
-            }
-        }
-        if (trainingMH[1] <= 0) {
-            System.out.println("You defeated the " + Monster[1] + " with " + tempHealth + " health remaining!");
-            tempHealth = 100;
-        } else if (tempHealth <= 0) {
-            System.out.println("You were defeated by the " + Monster[1] + " who had " + trainingMH[1] + " health remaining.");
-            nRounds_Final = nRounds - 1;
-            nRounds = 4;
-
-        }
-    }
-
-    void spawnCalark() {
-        System.out.println("A Calark approaches...");
-        while (trainingMH[2] > 0 && tempHealth > 0) {
-            attack.playerAttack(Monster[2], 2, trainingMH);
-            if (trainingMH[2] > 0) {
-                attack.monsterAttack(Monster[2], starylMain.randomInt(20, 30), tempHealth);
-            }
-        }
-        if (trainingMH[2] <= 0) {
-            System.out.println("You defeated the " + Monster[2] + " with " + tempHealth + " health remaining!");
-            tempHealth = 100;
-        } else if (tempHealth <= 0) {
-            System.out.println("You were defeated by the " + Monster[2] + " who had " + trainingMH[2] + " health remaining.");
+        } else if (tempHeath <= 0) {
+            System.out.println("You were defeated by the " + Monster[monsterIndex] + " who had " + trainingMH[monsterIndex] + " health remaining.");
             nRounds_Final = nRounds - 1;
             nRounds = 4;
 
