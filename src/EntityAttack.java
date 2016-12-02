@@ -11,11 +11,13 @@ public class EntityAttack {
     static TrainingCenter training = new TrainingCenter();
     static Player p = new Player();
 
+    final String attackMonster[] = {"neck", "eyes", "chest"};
+
+    final int percentNeck[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    final int percentEyes[] = {0, 1, 2, 3, 4};
+    final int percentChest[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18};
+
     void playerAttack(String monsterName, int monsterIndex, int[] monsterHealth) {
-        final String attackMonster[] = {"neck", "eyes", "chest"};
-        final int percentNeck[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-        final int percentEyes[] = {0, 1, 2, 3, 4};
-        final int percentChest[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18};
         percentHit = starylMain.randomInt(0, 10);
         tempDamage = 0;
         repeatAttack = true;
@@ -24,16 +26,7 @@ public class EntityAttack {
             for (int a = 0; a <= attackMonster.length - 1; a++) {
                 System.out.println("(" + attackMonster[a] + ")");
             }
-            String userAttack = starylMain.readLine(">");
-            if (userAttack.equals(attackMonster[0])) {
-                hitNeck(percentNeck);
-            } else if (userAttack.equals(attackMonster[1])) {
-                hitEyes(percentEyes);
-            } else if (userAttack.equals(attackMonster[2])) {
-                hitChest(percentChest);
-            } else {
-                System.out.println("Invalid Input");
-            }
+            trainingPositionOfAttack();
         }
         monsterHealth[monsterIndex] -= tempDamage;
         if (monsterHealth[monsterIndex] < 0) {
@@ -70,10 +63,10 @@ public class EntityAttack {
         System.out.println("The " + monsterName + " dealt " + monsterdmgValue + " damage! You now have " + temptempHealth + " health.");
     }
 
-    void hitNeck(int[] percentN) {
+    void hitNeck(int[] percentN, int playerDamage) {
         for (int p = 0; p <= percentN.length - 1; p++) {
             if (percentHit == percentN[p]) { // 60% hit percentage
-                tempDamage = starylMain.randomInt(20, 40);
+                tempDamage = starylMain.randomInt(20, 40); // change this for nontraining battle
             }
         }
         if (tempDamage == 0) {
@@ -82,10 +75,10 @@ public class EntityAttack {
         repeatAttack = false;
     }
 
-    void hitEyes(int[] percentE) {
+    void hitEyes(int[] percentE, int playerDamage) {
         for (int p = 0; p <= percentE.length - 1; p++) {
             if (percentHit == percentE[p]) { // 20% hit percentage
-                tempDamage = starylMain.randomInt(40, 60);
+                tempDamage = starylMain.randomInt(40, 60); // change this for nontraining battle
             }
         }
         if (tempDamage == 0) {
@@ -94,10 +87,10 @@ public class EntityAttack {
         repeatAttack = false;
     }
 
-    void hitChest(int[] percentC) {
+    void hitChest(int[] percentC, int playerDamage) {
         for (int p = 0; p <= percentC.length - 1; p++) {
             if (percentHit == percentC[p]) { // 90% hit percentage
-                tempDamage = starylMain.randomInt(10, 20);
+                tempDamage = starylMain.randomInt(10, 20); // change this for nontraining battle
             }
         }
         if (tempDamage == 0) {
@@ -105,4 +98,19 @@ public class EntityAttack {
         }
         repeatAttack = false;
     }
+
+    void trainingPositionOfAttack() {
+        String userAttack = starylMain.readLine(">");
+        if (userAttack.equals(attackMonster[0])) {
+            hitNeck(percentNeck, starylMain.randomInt(20, 40));
+        } else if (userAttack.equals(attackMonster[1])) {
+            hitEyes(percentEyes, starylMain.randomInt(40, 60));
+        } else if (userAttack.equals(attackMonster[2])) {
+            hitChest(percentChest, starylMain.randomInt(10, 20));
+        } else {
+            System.out.println("Invalid Input");
+        }
+    }
+
+
 }

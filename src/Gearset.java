@@ -5,8 +5,9 @@ public class Gearset {
 
     int weaponClass = 0;
 
-    static String armour[] = {"Helmet", "Shirt", "Pants", "Boots", "Slingshot"};
+    static String armour[] = {"Helmet", "Shirt", "Pants", "Boots"};
     static String weapons[] = {"Slingshot", "Machete", "Hunting Rifle", "Saber"};
+    static String gear[] = {"Helmet", "Shirt", "Pants", "Boots", "Weapon"};
 
     static final String AMO_NAMES[] = {"Pebbles", "Bullets"};
     static int amo[] = {0, 0};
@@ -46,16 +47,6 @@ public class Gearset {
         }
     }
 
-    void armourExperience() {
-        starylMain.turn++;
-        if (starylMain.turn >= 1) {
-            for (int i = 0; i <= armourExp.length - 1; i++) {
-                armourExp[i] += 25;
-                System.out.println(armour[i] + " increased by 25\nCurrent " + armour[i] + " experience: " + armourExp[i]);
-            }
-        }
-        System.out.println();
-    }
     void armourLevelUp() {
         for (int e = 0; e <= armourExp.length - 1 ; e++) {
             if (armourExp[e] >= 100) {
