@@ -42,6 +42,7 @@ public class starylMain {
     static Player p = new Player();
     static ViewableMaps seemaps = new ViewableMaps();
     static TrainingCenter training = new TrainingCenter();
+    static MonsterOrganization monster = new MonsterOrganization();
 
     static int nDistance;
     static int gameDiff;
@@ -127,6 +128,8 @@ public class starylMain {
                     // armour exp, coins, pebbles and lives for locations traveled
                     spawn.giveCoins();
                     spawn.givePebbles();
+
+                    monster.spawnMonster(0, monster.monsterHealth, monster.MONSTER_NAMES, 10, 30);
 
                     // prints info
                     map.getRoom(currentRoomIndex).printInfo();
