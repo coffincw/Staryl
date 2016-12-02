@@ -8,7 +8,15 @@ public class MonsterOrganization {
     boolean test;
 
     final static String BOSS_NAMES[] = {"Hadyiss", "Kalyth", "Gijhn", "Weril"};
+    static int bossHealth[] = {200, 300, 400, 500};
+
+
     final static String MONSTER_NAMES[] = {"Giv", "Kar", "Perrkill"};
+    static int monsterHealth[] = {40, 50, 30};
+
+    // work on making player deal more damage with higher upgraded armour
+    static int playerDamageLOW[] = {};
+    static int playerDamageHIGH[] = {};
 
     void spawnMonster(int monsterIndex, int[] monsterhealthArray, String[] monsterNames, int possiblemonsterDMG_lowest, int possiblemonsterDMG_highest) {
         System.out.println("A " + monsterNames[monsterIndex] + " approaches...");
@@ -24,4 +32,5 @@ public class MonsterOrganization {
             System.out.println("You were defeated by the " + monsterNames[monsterIndex] + " who had " + monsterhealthArray[monsterIndex] + " health remaining.");
         }
     }
+
 }
