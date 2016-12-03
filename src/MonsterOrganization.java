@@ -8,12 +8,10 @@ public class MonsterOrganization {
     static Gearset gear = new Gearset();
     boolean test;
 
-    final static String BOSS_NAMES[] = {"Hadyiss", "Kalyth", "Gijhn", "Weril"};
-    static int bossHealth[] = {200, 300, 400, 500};
-
 
     final static String MONSTER_NAMES[] = {"Giv", "Kar", "Perrkill"};
     static int monsterHealth[] = {40, 50, 30};
+    final static int MONSTER_HEALTH_START[] = {40, 50, 30};
     final static int monsterExp[] = {10, 15, 5};
 
     // work on making player deal more damage with higher upgraded armour
@@ -34,6 +32,7 @@ public class MonsterOrganization {
         } else if (p.playerLives[starylMain.gameDiff] <= 0) {
             System.out.println("You were defeated by the " + monsterNames[monsterIndex] + " who had " + monsterhealthArray[monsterIndex] + " health remaining.");
         }
+        resetMonsterHealth();
     }
 
     void expWon(int monsterIndex) {
@@ -54,6 +53,12 @@ public class MonsterOrganization {
             }
         }
 
+    }
+
+    void resetMonsterHealth() {
+        for (int r = 0; r <= monsterHealth.length; r++) {
+            monsterHealth[r] = MONSTER_HEALTH_START[r];
+        }
     }
 
 }
