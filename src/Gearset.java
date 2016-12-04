@@ -5,6 +5,8 @@ public class Gearset {
 
     int weaponClass = 0;
 
+    static Player p = new Player();
+
     static String armour[] = {"Helmet", "Shirt", "Pants", "Boots"};
     static String weapons[] = {"Slingshot", "Machete", "Hunting Rifle", "Saber"};
     static String gear[] = {"Helmet", "Shirt", "Pants", "Boots", "Weapon"};
@@ -14,7 +16,8 @@ public class Gearset {
 
     static final String weaponStart[] = {"Wooden", "Rusted", "Cricket", "Wooden"};
 
-    //gear upgrades
+    //v gear upgrades v
+
     //armour upgrades
     static final String armourUpgrade[] = {"Tin Foil", "Steel", "Ultimate", "Staryl - X"};
     // weapon upgrades
@@ -64,6 +67,7 @@ public class Gearset {
                 if (weaponClass >= 3 && weaponUpValue[e] >= 100) {}
                 else {
                     weaponUpValue[e]++;
+                    p.additionalDamage[0] += 10;
                     if (weaponClass == 0) {
                         System.out.println("Slingshot level up to " + slingshotUpgrade[weaponUpValue[e]]);
                     } else if (weaponClass == 1) {

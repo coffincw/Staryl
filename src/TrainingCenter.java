@@ -68,7 +68,7 @@ public class TrainingCenter {
     void spawnTrainingMonster(int monsterIndex) {
         System.out.println("A " + Monster[monsterIndex] + " approaches...");
         while (trainingMH[monsterIndex] > 0 && tempHeath > 0) {
-            attack.playerAttack(Monster[monsterIndex], monsterIndex, trainingMH);
+            attack.playerAttack(Monster[monsterIndex], monsterIndex, trainingMH, training);
             if (trainingMH[monsterIndex] > 0) {
                 attack.monsterAttack(Monster[monsterIndex], starylMain.randomInt(monsterDMGLOW[monsterIndex], monsterDMGHIGH[monsterIndex]), monstercheck);
             }

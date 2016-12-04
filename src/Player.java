@@ -25,6 +25,9 @@ public class Player {
     static int playerHealth[] = {0, 200, 100, 50};
     static final int healPHealth[] = {0, 200, 100, 50};
 
+    // weapon, pet, armour
+    static int additionalDamage[] = {0, 0};
+
     final String DIFFICULTY_NAME [] = {"", "Easy", "Medium", "Hard"};
 
     static Gearset gear = new Gearset();
