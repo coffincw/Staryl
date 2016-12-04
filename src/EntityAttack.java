@@ -3,19 +3,19 @@
  */
 public class EntityAttack {
 
-    boolean repeatAttack;
-    int percentHit;
-    int tempDamage;
+    private boolean repeatAttack;
+    private int percentHit;
+    private int tempDamage;
     int temptempHealth;
 
-    static TrainingCenter training = new TrainingCenter();
-    static Player p = new Player();
+    private static TrainingCenter training = new TrainingCenter();
+    private static Player p = new Player();
 
     final String attackMonster[] = {"neck", "eyes", "chest"};
 
-    final int percentNeck[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-    final int percentEyes[] = {0, 1, 2, 3, 4};
-    final int percentChest[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18};
+    private final int percentNeck[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    private final int percentEyes[] = {0, 1, 2, 3, 4};
+    private final int percentChest[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18};
 
     void playerAttack(String monsterName, int monsterIndex, int[] monsterHealth) {
         percentHit = starylMain.randomInt(0, 10);
@@ -63,7 +63,7 @@ public class EntityAttack {
         System.out.println("The " + monsterName + " dealt " + monsterdmgValue + " damage! You now have " + temptempHealth + " health.");
     }
 
-    void hitNeck(int[] percentN, int playerDamage) {
+    private void hitNeck(int[] percentN, int playerDamage) {
         for (int p = 0; p <= percentN.length - 1; p++) {
             if (percentHit == percentN[p]) { // 60% hit percentage
                 tempDamage = starylMain.randomInt(20, 40); // change this for nontraining battle
@@ -75,7 +75,7 @@ public class EntityAttack {
         repeatAttack = false;
     }
 
-    void hitEyes(int[] percentE, int playerDamage) {
+    private void hitEyes(int[] percentE, int playerDamage) {
         for (int p = 0; p <= percentE.length - 1; p++) {
             if (percentHit == percentE[p]) { // 20% hit percentage
                 tempDamage = starylMain.randomInt(40, 60); // change this for nontraining battle
@@ -87,7 +87,7 @@ public class EntityAttack {
         repeatAttack = false;
     }
 
-    void hitChest(int[] percentC, int playerDamage) {
+    private void hitChest(int[] percentC, int playerDamage) {
         for (int p = 0; p <= percentC.length - 1; p++) {
             if (percentHit == percentC[p]) { // 90% hit percentage
                 tempDamage = starylMain.randomInt(10, 20); // change this for nontraining battle
@@ -99,7 +99,7 @@ public class EntityAttack {
         repeatAttack = false;
     }
 
-    void trainingPositionOfAttack() {
+    private void trainingPositionOfAttack() {
         String userAttack = starylMain.readLine(">");
         if (userAttack.equals(attackMonster[0])) {
             hitNeck(percentNeck, starylMain.randomInt(20, 40));

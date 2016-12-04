@@ -128,7 +128,6 @@ public class starylMain {
                     // armour exp, coins, pebbles and lives for locations traveled
                     spawn.giveCoins();
                     spawn.givePebbles();
-
                     monster.spawnMonster(0, monster.monsterHealth, monster.MONSTER_NAMES, 10, 30);
 
                     // prints info

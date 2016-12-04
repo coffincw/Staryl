@@ -56,7 +56,7 @@ public class MonsterOrganization {
     }
 
     void resetMonsterHealth() {
-        for (int r = 0; r <= monsterHealth.length; r++) {
+        for (int r = 0; r <= monsterHealth.length - 1; r++) {
             monsterHealth[r] = MONSTER_HEALTH_START[r];
         }
     }

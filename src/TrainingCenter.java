@@ -4,7 +4,6 @@
 public class TrainingCenter {
 
     static Gearset gear = new Gearset();
-    static MonsterOrganization monster = new MonsterOrganization();
     static EntityAttack attack = new EntityAttack();
     final int monsterDMGLOW[] = {0, 10, 20};
     final int monsterDMGHIGH[] = {10, 20, 30};
@@ -16,9 +15,10 @@ public class TrainingCenter {
     boolean training = true; // this may make it always be true
     int tempHeath = 100;
     boolean monstercheck;
+    boolean trainrepeat;
 
     void trainingInfo(String centerName) {
-        boolean trainrepeat = true;
+        trainrepeat = true;
         while (trainrepeat) {
             System.out.println("Welcome to " + centerName + ".  The training center is a place where you have an opportunity to train in order to level up your armour." +
                     "\nBe aware, the training center only allows you to work on a piece of armour every 30 miles you travel, so choose wisely." +
@@ -30,12 +30,7 @@ public class TrainingCenter {
             }
             String train = starylMain.readLine(">");
             train = train.toLowerCase();
-            for (int ti = 0; ti <= trainGear.length - 1; ti++) {
-                if (train.equals(trainGear[ti])) {
-                    initiateTraining(trainGear[ti], ti);
-                    trainrepeat = false;
-                }
-            }
+            catchMaxUpgrade(train);
 
         }
     }
@@ -87,6 +82,29 @@ public class TrainingCenter {
             nRounds_Final = nRounds - 1;
             nRounds = 4;
 
+        }
+    }
+
+    void catchMaxUpgrade(String trainingItem) {
+        for (int ti = 0; ti <= trainGear.length - 1; ti++) {
+            if (trainingItem.equals(trainGear[ti])) {
+                if (ti == 4) {
+                    if (gear.weaponUpValue[4] >= 4 && gear.weaponExp[4] >= 100) {
+                        System.out.println("Sorry this item is maxed out and cant be trained.\n");
+                    } else {
+                        initiateTraining(trainGear[ti], ti);
+                        trainrepeat = false;
+                    }
+                } else {
+                    if (gear.armourUpValue[ti] >= 4 && gear.armourExp[ti] >= 100) {
+                        System.out.println("Sorry this item is maxed out and cant be trained.\n");
+                    } else {
+                        initiateTraining(trainGear[ti], ti);
+                        trainrepeat = false;
+                    }
+                }
+
+            }
         }
     }
 
