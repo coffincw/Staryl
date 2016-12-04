@@ -3,9 +3,11 @@
  */
 public class MonsterOrganization {
 
-    static EntityAttack attack = new EntityAttack();
+    static PlayerAttack p_attack = new PlayerAttack();
     static Player p = new Player();
     static Gearset gear = new Gearset();
+    static MonsterAttack m_attack = new MonsterAttack();
+
     boolean test = false;
     boolean training = false;
 
@@ -19,9 +21,9 @@ public class MonsterOrganization {
     void spawnMonster(int monsterIndex, int[] monsterhealthArray, String[] monsterNames, int possiblemonsterDMG_lowest, int possiblemonsterDMG_highest) {
         System.out.println("A " + monsterNames[monsterIndex] + " approaches...");
         while (monsterhealthArray[monsterIndex] > 0 && p.playerLives[starylMain.gameDiff] > 0) {
-            attack.playerAttack(monsterNames[monsterIndex], monsterIndex, monsterhealthArray, training);
+            p_attack.playerAttack(monsterNames[monsterIndex], monsterIndex, monsterhealthArray, training);
             if (monsterhealthArray[monsterIndex] > 0) {
-                attack.monsterAttack(monsterNames[monsterIndex], starylMain.randomInt(possiblemonsterDMG_lowest, possiblemonsterDMG_highest), test);
+                m_attack.mAttack(monsterNames[monsterIndex], starylMain.randomInt(possiblemonsterDMG_lowest, possiblemonsterDMG_highest), test);
             }
         }
         if (monsterhealthArray[0] <= 0) {

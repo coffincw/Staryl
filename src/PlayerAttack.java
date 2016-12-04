@@ -1,14 +1,12 @@
 /**
  * Created by coffincw on 11/29/16.
  */
-public class EntityAttack {
+public class PlayerAttack {
 
     private boolean repeatAttack;
     private int percentHit;
     private int tempDamage;
-    int temptempHealth;
 
-    private static TrainingCenter training = new TrainingCenter();
     private static Player p = new Player();
     private static MonsterOrganization monster = new MonsterOrganization();
 
@@ -38,34 +36,6 @@ public class EntityAttack {
             monsterHealth[monsterIndex] = 0;
         }
         System.out.println("You dealt " + tempDamage + " to the " + monsterName + "! the " + monsterName + " has " + monsterHealth[monsterIndex] + " health remaining.");
-    }
-
-    void monsterAttack(String monsterName, int monsterdmgValue, boolean checkmonster) {
-        if (checkmonster) {
-            training.tempHeath = 100;
-        }
-        if (training.training) {
-            training.tempHeath -= monsterdmgValue;
-            if (training.tempHeath < 0) {
-                training.tempHeath = 0;
-            }
-            temptempHealth = training.tempHeath;
-        } else {
-            System.out.println(starylMain.gameDiff);
-            temptempHealth = p.playerHealth[starylMain.gameDiff];
-            temptempHealth -= monsterdmgValue;
-            if (temptempHealth <= 0) {
-                p.playerLives[starylMain.gameDiff]--;
-                System.out.println("You lost a life");
-                p.playerHealth[starylMain.gameDiff] = p.healPHealth[starylMain.gameDiff];
-            } else {
-                p.playerHealth[starylMain.gameDiff] = temptempHealth;
-            }
-        }
-        if (monsterdmgValue == 0) {
-            System.out.println("The " + monsterName + "'s attack missed!");
-        }
-        System.out.println("The " + monsterName + " dealt " + monsterdmgValue + " damage! You now have " + temptempHealth + " health.");
     }
 
     private void hitNeck(int[] percentN, int playerDamage) {

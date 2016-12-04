@@ -4,7 +4,9 @@
 public class TrainingCenter {
 
     static Gearset gear = new Gearset();
-    static EntityAttack attack = new EntityAttack();
+    static PlayerAttack p_attack = new PlayerAttack();
+    static MonsterAttack m_attack = new MonsterAttack();
+
     final int monsterDMGLOW[] = {0, 10, 20};
     final int monsterDMGHIGH[] = {10, 20, 30};
     final String Monster[] = {"Findlewumper", "Gorp", "Calark"}; // monster names
@@ -68,14 +70,14 @@ public class TrainingCenter {
     void spawnTrainingMonster(int monsterIndex) {
         System.out.println("A " + Monster[monsterIndex] + " approaches...");
         while (trainingMH[monsterIndex] > 0 && tempHeath > 0) {
-            attack.playerAttack(Monster[monsterIndex], monsterIndex, trainingMH, training);
+            p_attack.playerAttack(Monster[monsterIndex], monsterIndex, trainingMH, training);
             if (trainingMH[monsterIndex] > 0) {
-                attack.monsterAttack(Monster[monsterIndex], starylMain.randomInt(monsterDMGLOW[monsterIndex], monsterDMGHIGH[monsterIndex]), monstercheck);
+                m_attack.mAttack(Monster[monsterIndex], starylMain.randomInt(monsterDMGLOW[monsterIndex], monsterDMGHIGH[monsterIndex]), monstercheck);
             }
             monstercheck = false;
         }
         if (trainingMH[0] <= 0) {
-            System.out.println("You defeated the " + Monster[monsterIndex] + " with " + attack.temptempHealth + " health remaining!");
+            System.out.println("You defeated the " + Monster[monsterIndex] + " with " + m_attack.temptempHealth + " health remaining!");
 
         } else if (tempHeath <= 0) {
             System.out.println("You were defeated by the " + Monster[monsterIndex] + " who had " + trainingMH[monsterIndex] + " health remaining.");

@@ -54,6 +54,7 @@ public class Gearset {
         for (int e = 0; e <= armourExp.length - 1 ; e++) {
             if (armourExp[e] >= 100) {
                 armourUpValue[e] ++;
+                p.additionalDefense[e] += 10;
                 System.out.println(armour[e] + " leveled up to: " + armourUpgrade[armourUpValue[e]]);
                 armourExp[e] = 0;
             }

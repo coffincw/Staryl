@@ -118,7 +118,7 @@ public class starylMain {
             if (gamemodeTitle == 1) {
                 while (gameDiff < 1) {
                     try {
-                        gameDiff = Integer.valueOf(readLine("Select a difficulty\n<1> Easy (1 life / 50 health) \n<2> Medium (3 lives / 100 health)\n<3> Hard (5 Lives / 200 health)\n"));
+                        gameDiff = Integer.valueOf(readLine("Select a difficulty\n<1> Easy (5 life / 200 health) \n<2> Medium (3 lives / 100 health)\n<3> Hard (1 Lives / 50 health)\n"));
                     } catch (NumberFormatException ex) {
                     }
                 }

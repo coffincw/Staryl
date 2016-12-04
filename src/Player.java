@@ -27,6 +27,7 @@ public class Player {
 
     // weapon, pet, armour
     static int additionalDamage[] = {0, 0};
+    static int additionalDefense[] = {0, 0, 0, 0};
 
     final String DIFFICULTY_NAME [] = {"", "Easy", "Medium", "Hard"};
 
