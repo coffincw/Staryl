@@ -6,9 +6,12 @@ public class PlayerAttack {
     private boolean repeatAttack;
     private int percentHit;
     private int tempDamage;
+    int attack;
+    private int poison;
 
     private static Player p = new Player();
     private static MonsterOrganization monster = new MonsterOrganization();
+    private static Gearset gear = new Gearset();
 
     final String attackMonster[] = {"neck", "eyes", "chest"};
 
@@ -36,6 +39,12 @@ public class PlayerAttack {
             monsterHealth[monsterIndex] = 0;
         }
         System.out.println("You dealt " + tempDamage + " to the " + monsterName + "! the " + monsterName + " has " + monsterHealth[monsterIndex] + " health remaining.");
+
+        System.out.println(poison);
+        System.out.println(attack);
+        if (poison != 0) {
+            System.out.println("The " + monsterName + " was hurt by your machete's poison blade");
+        }
     }
 
     private void hitNeck(int[] percentN, int playerDamage) {
@@ -45,8 +54,10 @@ public class PlayerAttack {
             }
         }
         if (tempDamage == 0) {
+            attack += 0;
             System.out.println("Your attack missed!");
         }
+        attack += 1;
         repeatAttack = false;
     }
 
@@ -57,20 +68,26 @@ public class PlayerAttack {
             }
         }
         if (tempDamage == 0) {
+            attack += 0;
             System.out.println("Your attack missed!");
         }
+        attack += 1;
         repeatAttack = false;
     }
 
     private void hitChest(int[] percentC, int playerDamage) {
+
         for (int p = 0; p <= percentC.length - 1; p++) {
             if (percentHit == percentC[p]) { // 90% hit percentage
                 tempDamage = playerDamage; // change this for nontraining battle
             }
         }
         if (tempDamage == 0) {
+            attack += 0;
             System.out.println("Your attack missed!");
         }
+        attack += 1;
+        System.out.println(poison);
         repeatAttack = false;
     }
 
@@ -106,8 +123,22 @@ public class PlayerAttack {
         for (int a = 0; a <= p.additionalDamage.length - 1; a++) {
             damage += p.additionalDamage[a];
         }
+        poison = machetePoison();
+        damage += poison;
         damage -= monster.monsterDefense[monsterIndex];
         return damage;
+    }
+
+    int machetePoison() {
+        int poison = 0;
+        gear.weaponClass = 1;
+        if (gear.weaponClass == 1 && attack != 0) {
+            int change = starylMain.randomInt(1, 5);
+            if (change == 1) {
+                poison = starylMain.randomInt(5, 10);
+            }
+        }
+        return poison;
     }
 
 

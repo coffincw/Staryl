@@ -20,6 +20,7 @@ public class MonsterOrganization {
 
     void spawnMonster(int monsterIndex, int[] monsterhealthArray, String[] monsterNames, int possiblemonsterDMG_lowest, int possiblemonsterDMG_highest) {
         System.out.println("A " + monsterNames[monsterIndex] + " approaches...");
+        p_attack.attack = 0;
         while (monsterhealthArray[monsterIndex] > 0 && p.playerLives[starylMain.gameDiff] > 0) {
             p_attack.playerAttack(monsterNames[monsterIndex], monsterIndex, monsterhealthArray, training);
             if (monsterhealthArray[monsterIndex] > 0) {
